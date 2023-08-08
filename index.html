@@ -4,19 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pizza Finder</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
-    <h1 class="container__title">Pizza Finder</h1>
+    <h1 class="container__title"><i class="fa-solid fa-pizza-slice"></i> Pizza Finder</h1>
     <div class="form__container">
-      <label class="form__label" for="inputNumber">Ingresa el ID de la pizza:</label>
-      <input type="number" id="inputNumber" />
-      <button id="btnEnviar">Buscar Pizzas</button>
+      <p class="form__txt">Ingresar un número</p>
+      <div class="btn__container">
+        <input type="number" id="inputNumber" />
+        <label class="form__label"></label>
+        <button id="btnEnviar"><i class="fa-solid fa-magnifying-glass"></i></i></button>
+      </div>
     </div>
     <div id="graficarContainer" class="pizza__container"></div>
   </div>
-
-  <script src="script.js"></script>
+  <script src="index.js"></script>
 </body>
 </html>

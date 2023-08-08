@@ -50,12 +50,16 @@ const inputElement = document.getElementById("inputNumber");
 const btnEnviar = document.getElementById("btnEnviar");
 const graficarContainer = document.getElementById("graficarContainer");
 
+
+
+// Función para capturar el click
+
 btnEnviar.addEventListener("click", function (e) {
   e.preventDefault();
   const valorIngresado = parseInt(inputElement.value);
 
   if (isNaN(valorIngresado)) {
-    mostrarMensajeError("Por favor, ingresa un número válido.");
+    mostrarMensajeError("Por favor, ingresa un número.");
   } else {
     const encontrarPizza = buscarPizzaPorId(valorIngresado);
 
@@ -68,6 +72,30 @@ btnEnviar.addEventListener("click", function (e) {
     }
   }
 });
+
+
+// Función para capturar el enter del usuario
+
+inputElement.addEventListener("keydown", function(e) {
+  if (e.key === "Enter") {
+    const valorIngresado = parseInt(inputElement.value);
+
+    if (!isNaN(valorIngresado)) {
+      const encontrarPizza = buscarPizzaPorId(valorIngresado);
+
+      if (encontrarPizza) {
+        mostrarResultado(encontrarPizza);
+        localStorage.setItem("pizzaEncontrada", JSON.stringify(encontrarPizza));
+        mostrarUltimaPizzaEncontrada();
+      } else {
+        mostrarMensajeError("No se encontró ninguna pizza con el ID proporcionado.");
+      }
+    }
+  }
+});
+
+
+// Función para buscar las pizzas por ID
 
 function buscarPizzaPorId(id) {
   return pizzas.find((pizza) => pizza.id === id);
@@ -88,9 +116,15 @@ function mostrarResultado(pizza) {
   graficarContainer.innerHTML = resultadoPizza;
 }
 
+
+// Mostrar mensaje de error
+
 function mostrarMensajeError(mensaje) {
   graficarContainer.innerHTML = `<div class="error__mensaje">${mensaje}</div>`;
 }
+
+
+// Funcion para evitar errores antes de que el DOM este cargado completamente
 
 document.addEventListener("DOMContentLoaded", function () {
   const pizzaEncontradaStr = localStorage.getItem("pizzaEncontrada");
@@ -100,13 +134,12 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
+// Funcion para preservar la ultima pizza por ID encontrada
+
 window.addEventListener("unload", () => {
   const pizzaEncontrada = JSON.parse(localStorage.getItem("pizzaEncontrada"));
   if (pizzaEncontrada) {
     localStorage.setItem("pizzaEncontrada", JSON.stringify(pizzaEncontrada));
   }
 });
-
-
-
 
