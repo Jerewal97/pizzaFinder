@@ -143,3 +143,8 @@ window.addEventListener("unload", () => {
   }
 });
 
+// Funcion para posicionar el mouse siempre en el input 
+
+window.addEventListener("load", function() {
+  inputElement.focus();
+})
